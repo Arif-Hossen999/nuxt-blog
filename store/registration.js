@@ -5,7 +5,7 @@ export const state = () => ({
   registerUsername: null,
   registerEmail: null,
   registerPassword: null,
-  // variable for store frontend form validation message
+  // variable for store frontend form validation error message
   registerFormErrorUsername: null,
   registerFormErrorEmail: null,
   registerFormErrorPassword: null,
@@ -14,9 +14,8 @@ export const state = () => ({
   registerErrorEmail: null,
   registerErrorEmailUnique: null,
   registerErrorPassword: null,
-// variable for store backend catch error message
-  registerError: null,
-  
+  // variable for store backend catch error message
+  registerError: null
 });
 // mutations for user registration
 export const mutations = {
@@ -56,16 +55,18 @@ export const mutations = {
   // store backend catch error message
   setRegisterError(state, error) {
     state.registerError = error;
-  },
-  
+  }
 };
 // actions for user registration
 export const actions = {
   getInput({ state, commit }) {
     // console.log(state, "state");
-    
-    if (state.registerUsername && state.registerEmail && state.registerPassword != null) {
-      
+
+    if (
+      state.registerUsername &&
+      state.registerEmail &&
+      state.registerPassword != null
+    ) {
       return HTTP.userRegister({
         username: state.registerUsername,
         email: state.registerEmail,
@@ -91,8 +92,11 @@ export const actions = {
             }
           } else {
             // show success message and redirect login page
-            this.$toast.success('Sign up successfull')
+            this.$toast.success("Sign up successfull");
             this.$router.push({ name: "auth-login" });
+
+            // remove state data
+            state.registerUsername = state.registerEmail = state.registerPassword = state.registerFormErrorUsername = state.registerFormErrorEmail = state.registerFormErrorPassword = state.registerErrorUsername = state.registerErrorEmail = state.registerErrorEmailUnique = state.registerErrorPassword = state.registerError = null;
           }
         })
         .catch(error => {
@@ -101,8 +105,8 @@ export const actions = {
         });
     }
 
-    // check frontend form validation 
-     if (state.registerUsername == null) {
+    // check frontend form validation
+    if (state.registerUsername == null) {
       commit("setRegisterFormErrorUsername", "Username is required.");
     }
     if (state.registerEmail == null) {
@@ -111,6 +115,5 @@ export const actions = {
     if (state.registerPassword == null) {
       commit("setRegisterFormErrorPassword", "Password is required.");
     }
-    
   }
 };

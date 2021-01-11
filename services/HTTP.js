@@ -10,6 +10,13 @@ export default {
       password
     });
   },
+  // user login
+  userLogin({email, password }) {
+    return clientAPI(baseURL).post("/api/auth/login", {
+      email,
+      password
+    });
+  },
   // get all posts
   getPost() {
     return clientAPI(baseURL).get("/api/allpost");

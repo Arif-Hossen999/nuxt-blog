@@ -4,33 +4,36 @@
       <v-card-title>
         <h1 class="dispay-1">Login</h1>
       </v-card-title>
-
       <v-card-text>
         <v-form>
-          <p v-if="errors.length">
-          <b>
-            Please correct the following error(s):
-          </b>
-          <ul>
-          <li v-for="error in errors">{{ error }}</li>
-          </ul>
-         </p>
           <v-text-field
             label="Email"
-            v-model="email"
+            :value="loginEmail"
+            @input="setLoginEmail"
             prepend-icon="mdi-email"
           />
-
+          <!-- show frontend error message -->
+          <p>{{loginFormErrorEmail}}</p>
+          <!-- show backend error message -->
+          <p>{{ loginErrorEmail }}</p>
+          <!-- show backend try error message -->
+          <p>{{ loginErrorEmailCheck }}</p>
           <v-text-field
             type="password"
             label="Password"
-            v-model="password"
+            :value="loginPassword"
+            @input="setLoginPassword"
             prepend-icon="mdi-lock"
           />
+          <!-- show frontend error message -->
+          <p>{{loginFormErrorPassword}}</p>
+          <!-- show backend error message -->
+          <p>{{ loginErrorPassword }}</p>
+          <!-- show backend try error message -->
+          <p>{{ loginErrorPasswordCheck }}</p>
+          <!-- show backend catch error message -->
+          <p>{{ loginError }}</p>
         </v-form>
-        <!-- show validation error message -->
-        <p>{{responseErrorMessage}}</p>
-
       </v-card-text>
       <v-divider></v-divider>
 
@@ -43,81 +46,39 @@
 </template>
 
 <script>
+// import vuex for use store
+import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   name: "App",
-  data() {
-    return {
-      email: null,
-      password: null,
-      isCheck: null,
-      isCheckRegister: false,
-      responseErrorMessage:"",
-      responseData: false,
-      errors: []
-    };
-  },
 
   methods: {
-    // function for redirect sign up page
-    async getRegister() {
-      this.isCheckRegister = true;
-      if (this.isCheckRegister) {
-        this.$router.push({ name: "auth-signup" });
-      }
-    },
-    // function for login user
-    async getInput() {
-      try {
-        if (this.email && this.password) {
-        
-        this.isCheck = 1;
-        // call api for send form data
-        await this.callApi("post", "/mail/user/login", {
-          email: this.email,
-          password: this.password
-        }).then(response => {
-            // console.log(response);
-            this.isCheck = response.data;
-            // check validation error message
-            if(this.isCheck.length){
-                this.responseErrorMessage = this.isCheck[0].message 
-            }else{
-                this.responseData = true;
-            }
-            
-            // console.log(this.responseData);
-          if(this.responseData){
-              if (this.isCheck == 1 && response.status == 200) {
-                // console.log("inside if");
-                this.suc("Login successfull");
-                this.$router.push({ name: "index" });
-              } else {
-                // console.log("inside else");
-                this.swr("Login failed");
-                this.$router.push({ name: "auth-login" });
-              }
-          }
-          
-          //   close.log(isCheck);
-          //   return;
-        });
-
-       }
-        
-        // form validation
-        this.errors = [];
-        if (!this.email) {
-          this.errors.push("email required.");
-        }
-        if (!this.password) {
-          this.errors.push("password required.");
-        }
-        
-        // console.log(this.isCheck)
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    // pass form input value
+    ...mapMutations("login", [
+      "setLoginEmail", 
+      "setLoginPassword"
+      ]),
+    ...mapActions("login", [
+      "getInput", 
+      "getRegister"
+      ])
+  },
+  computed: {
+    ...mapState("login", [
+      // show form input value
+      "loginEmail",
+      "loginPassword",
+      // show frontend form validation error message
+      'loginFormErrorEmail',
+      'loginFormErrorPassword',
+      // show backend validation error message
+      "loginErrorEmail",
+      "loginErrorPassword",
+      // show backend try error message
+      "loginErrorEmailCheck",
+      "loginErrorPasswordCheck",
+      // show backend catch error message
+      "loginError"
+    ])
   }
 };
 </script>
