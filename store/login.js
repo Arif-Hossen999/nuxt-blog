@@ -62,6 +62,13 @@ export const mutations = {
 };
 
 export const actions = {
+  // user logout
+  logout({ commit }) {
+    commit('setUserToken', '')
+    commit('setUserId', '')
+    this.$toast.success("Successfully logged out!");
+    this.$router.push({ name: "auth-login" });
+  },
   // go to sign up page
   getRegister() {
     this.$router.push({ name: "auth-signup" });
@@ -74,7 +81,7 @@ export const actions = {
         password: state.loginPassword
       })
         .then(response => {
-          console.log(response);
+          // console.log(response);
 
           if (response.data.length) {
             // check backend validation error message
@@ -115,5 +122,16 @@ export const actions = {
     if (state.loginPassword == null) {
       commit("setLoginFormErrorPassword", "Password is required.");
     }
+  }
+};
+// store state value for use another page
+export const getters = {
+  // get login user id
+  userId: state => {
+    return state.userId;
+  },
+  // check user login or not
+  isLoggedIn: state => {
+    return !!state.token;
   }
 };

@@ -17,6 +17,14 @@ export default {
       password
     });
   },
+  // create post
+  createPost({title, post, user_id }) {
+    return clientAPI(baseURL).post("/api/create/post", {
+      title,
+      post,
+      user_id
+    });
+  },
   // get all posts
   getPost() {
     return clientAPI(baseURL).get("/api/allpost");

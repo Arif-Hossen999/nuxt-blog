@@ -1,3 +1,11 @@
 <template>
-    <h1>My Post</h1>
+    <MyPost />
 </template>
+<script>
+import MyPost from "~/components/MyPost.vue";
+export default {
+    components:{
+        MyPost,
+    }
+}
+</script>

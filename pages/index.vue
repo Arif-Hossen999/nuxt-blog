@@ -16,7 +16,7 @@ export default {
    
     async fetch({ store, error }) {
     try {
-      await store.dispatch("postStore/fetchPosts");
+      await store.dispatch("postView/fetchPosts");
       // console.log(data);
     } catch (e) {
       error({
@@ -27,7 +27,7 @@ export default {
   },
 
   computed: mapState({
-    posts: state => state.postStore.allPosts
+    posts: state => state.postView.allPosts
   })
 }
 </script>

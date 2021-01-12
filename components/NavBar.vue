@@ -2,14 +2,26 @@
     <div class="nav"> 
         <nuxt-link to="/" class="brand">Nuxt Blog</nuxt-link>
         <nav>
-            <nuxt-link to="/">Post</nuxt-link> |
-            <nuxt-link to="/mypost">MyPost</nuxt-link> |
-            <nuxt-link to="/auth/login">Login</nuxt-link> |
-            <nuxt-link to="/auth/signup">Signup</nuxt-link>
+            <nuxt-link to="/">Post</nuxt-link> 
+            <nuxt-link v-if="isLoggedIn" to="/mypost">MyPost</nuxt-link>
+            <nuxt-link v-if="isLoggedIn" to="/auth/logout">Logout</nuxt-link>
+            <nuxt-link v-if="!isLoggedIn" to="/auth/login">Login</nuxt-link>
+            <nuxt-link v-if="!isLoggedIn" to="/auth/signup">Signup</nuxt-link>
         </nav>
     </div>
 </template>
-
+<script>
+// import vuex for user store value
+import { mapGetters } from "vuex";
+export default {
+  computed: {
+    // get user login status
+    ...mapGetters('login',[
+      'isLoggedIn'
+    ])
+  }
+}
+</script>
 <style scoped>
 .brand {
       font-family: 'Montserrat', sans-serif;
