@@ -23,6 +23,7 @@ export const mutations = {
   // store user token and id
   setUserToken(state, userToken) {
     state.token = userToken;
+    // window.localStorage.token = JSON.stringify(userToken)
   },
   setUserId(state, userId) {
     state.userId = userId;

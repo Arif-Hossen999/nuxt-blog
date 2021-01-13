@@ -9,10 +9,12 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.12.5",
     "@nuxtjs/toast": "^3.3.1",
     "core-js": "^3.6.5",
     "nuxt": "^2.14.6",
+    "nuxt-vuex-localstorage": "^1.2.7",
     "view-design": "^4.4.0"
   },
   "devDependencies": {

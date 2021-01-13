@@ -11,14 +11,14 @@ export default {
     });
   },
   // user login
-  userLogin({email, password }) {
-    return clientAPI(baseURL).post("/api/auth/login", {
+  userLogin({ email, password }) {
+    return this.$auth.loginWith("local", "/api/auth/login", {
       email,
       password
     });
   },
   // create post
-  createPost({title, post, user_id }) {
+  createPost({ title, post, user_id }) {
     return clientAPI(baseURL).post("/api/create/post", {
       title,
       post,
@@ -28,5 +28,9 @@ export default {
   // get all posts
   getPost() {
     return clientAPI(baseURL).get("/api/allpost");
+  },
+  // get my posts
+  getMyPost() {
+    return clientAPI(baseURL).get("/api/mypost");
   }
 };

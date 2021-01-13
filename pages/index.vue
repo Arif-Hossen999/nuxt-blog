@@ -25,7 +25,7 @@ export default {
       });
     }
   },
-
+// get all post from state
   computed: mapState({
     posts: state => state.postView.allPosts
   })

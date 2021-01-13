@@ -1,4 +1,5 @@
 <template>
+<div>
   <v-app>
     <v-card width="400px" class="mt-5 mx-a">
       <v-card-title>
@@ -33,13 +34,30 @@
         <v-btn color="success" @click="getInput(userId)">Submit</v-btn>
       </v-card-action>
     </v-card>
+    <br>
+    <v-card width="400px" class="mt-5 mx-a">
+      <h3>My Post</h3>
+      <v-list-item-content>
+      <v-list-item-title v-for="(post, index) in myPosts"
+      :key="index"
+      :post="post">{{ post.title }}</v-list-item-title>
+       </v-list-item-content>
+    </v-card>
   </v-app>
+    <!-- <div>
+      {{myPosts}}
+    </div> -->
+  </div>
+    
 </template>
 
 <script>
 // import vuex for use store
 import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
 export default {
+  // props: {
+  //   post: Object
+  // },
   methods: {
     // pass form input value
     ...mapMutations("postCreate", [
@@ -63,8 +81,11 @@ export default {
       "postError",
       //use for show frontend form validation error message
       "postFormErrorTitle",
-      "postFormErrorDescription"
+      "postFormErrorDescription",
     ]),
+    ...mapState({
+    myPosts: state => state.myPost.myPosts
+  }),
     //get login user id 
     ...mapGetters('login',[
       'userId'

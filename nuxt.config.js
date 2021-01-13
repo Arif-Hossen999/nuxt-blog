@@ -26,8 +26,26 @@ export default {
   modules: [
     "@nuxtjs/vuetify",
     "@nuxtjs/axios",
-    "@nuxtjs/toast"
+    "@nuxtjs/toast",
+    /** Authentication Module */
+    '@nuxtjs/auth',
+    'nuxt-vuex-localstorage'
   ],
+
+  /**
+   * Auth Module Detail Endpoints
+   */
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/api/auth/login', method: 'post' },
+          logout: { url: '/api/auth/logout', method: 'post' },
+          user: { url: '/api/auth/user', method: 'get' }
+        }
+      }
+    }
+  },
 
   // show success error message
   toast: {
