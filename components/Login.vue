@@ -13,7 +13,7 @@
             prepend-icon="mdi-email"
           />
           <!-- show frontend error message -->
-          <p>{{loginFormErrorEmail}}</p>
+          <p>{{ loginFormErrorEmail }}</p>
           <!-- show backend error message -->
           <p>{{ loginErrorEmail }}</p>
           <!-- show backend try error message -->
@@ -26,7 +26,7 @@
             prepend-icon="mdi-lock"
           />
           <!-- show frontend error message -->
-          <p>{{loginFormErrorPassword}}</p>
+          <p>{{ loginFormErrorPassword }}</p>
           <!-- show backend error message -->
           <p>{{ loginErrorPassword }}</p>
           <!-- show backend try error message -->
@@ -37,10 +37,10 @@
       </v-card-text>
       <v-divider></v-divider>
 
-      <v-card-action>
+      <v-card-actions>
         <v-btn color="success" @click="getRegister()">Register</v-btn>
         <v-btn color="info" @click="getInput()">Login</v-btn>
-      </v-card-action>
+      </v-card-actions>
     </v-card>
   </v-app>
 </template>
@@ -53,14 +53,8 @@ export default {
 
   methods: {
     // pass form input value
-    ...mapMutations("login", [
-      "setLoginEmail", 
-      "setLoginPassword"
-      ]),
-    ...mapActions("login", [
-      "getInput", 
-      "getRegister"
-      ])
+    ...mapMutations("login", ["setLoginEmail", "setLoginPassword"]),
+    ...mapActions("login", ["getInput", "getRegister"])
   },
   computed: {
     ...mapState("login", [
@@ -68,8 +62,8 @@ export default {
       "loginEmail",
       "loginPassword",
       // show frontend form validation error message
-      'loginFormErrorEmail',
-      'loginFormErrorPassword',
+      "loginFormErrorEmail",
+      "loginFormErrorPassword",
       // show backend validation error message
       "loginErrorEmail",
       "loginErrorPassword",

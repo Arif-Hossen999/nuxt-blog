@@ -30,9 +30,9 @@
         </v-form>
       </v-card-text>
       <v-divider></v-divider>
-      <v-card-action>
-        <v-btn color="success" @click="getInput(userId)">Submit</v-btn>
-      </v-card-action>
+      <v-card-actions>
+        <v-btn color="success" @click="getInput()">Submit</v-btn>
+      </v-card-actions>
     </v-card>
     <br>
     <v-card width="400px" class="mt-5 mx-a">
@@ -63,7 +63,6 @@ export default {
     ...mapMutations("postCreate", [
         "setPostTitle", 
         "setPostDescription",
-        
         ]),
     ...mapActions("postCreate", [
         "getInput"
@@ -87,9 +86,9 @@ export default {
     myPosts: state => state.myPost.myPosts
   }),
     //get login user id 
-    ...mapGetters('login',[
-      'userId'
-    ])
+    // ...mapGetters('login',[
+    //   'userId'
+    // ])
   }
 };
 </script>

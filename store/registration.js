@@ -1,4 +1,3 @@
-import HTTP from "@/services/HTTP.js";
 // state for user registration
 export const state = () => ({
   // variable for store registraion form input
@@ -55,11 +54,11 @@ export const mutations = {
   // store backend catch error message
   setRegisterError(state, error) {
     state.registerError = error;
-  }
+  },
 };
 // actions for user registration
 export const actions = {
-  getInput({ state, commit }) {
+  async getInput({ state, commit }) {
     // console.log(state, "state");
 
     if (
@@ -67,36 +66,49 @@ export const actions = {
       state.registerEmail &&
       state.registerPassword != null
     ) {
-      return HTTP.userRegister({
-        username: state.registerUsername,
-        email: state.registerEmail,
-        password: state.registerPassword
+      await this.$axios
+        .$post("/api/auth/register", {
+          username: state.registerUsername,
+          email: state.registerEmail,
+          password: state.registerPassword
       })
         .then(response => {
-          // console.log(response.data);
+          // console.log(response);
           // check backend validation error message
-          if (response.data.length) {
-            if (response.data[0].message == "username is required.") {
-              commit("setRegisterErrorUsername", response.data[0].message);
+          if (response.length) {
+            // console.log("error length");
+            if (response[0].message == "username is required.") {
+              commit("setRegisterErrorUsername", response[0].message);
             }
-            if (response.data[0].message == "email is required.") {
-              commit("setRegisterErrorEmail", response.data[0].message);
+            if (response[0].message == "email is required.") {
+              commit("setRegisterErrorEmail", response[0].message);
             }
             if (
-              response.data[0].message == "This email has already been taken."
+              response[0].message == "This email has already been taken."
             ) {
-              commit("setRegisterErrorEmailUnique", response.data[0].message);
+              commit("setRegisterErrorEmailUnique", response[0].message);
             }
-            if (response.data[0].message == "password is required.") {
-              commit("setRegisterErrorPassword", response.data[0].message);
+            if (response[0].message == "password is required.") {
+              commit("setRegisterErrorPassword", response[0].message);
             }
           } else {
             // show success message and redirect login page
             this.$toast.success("Sign up successfull");
             this.$router.push({ name: "auth-login" });
-
             // remove state data
-            state.registerUsername = state.registerEmail = state.registerPassword = state.registerFormErrorUsername = state.registerFormErrorEmail = state.registerFormErrorPassword = state.registerErrorUsername = state.registerErrorEmail = state.registerErrorEmailUnique = state.registerErrorPassword = state.registerError = null;
+            commit("setRegisterUsername", "");
+            commit("setRegisterEmail", "");
+            commit("setRegisterPassword", "");
+
+            commit("setRegisterFormErrorUsername", "");
+            commit("setRegisterFormErrorEmail", "");
+            commit("setRegisterFormErrorPassword", "");
+            commit("setRegisterErrorUsername", "");
+            commit("setRegisterErrorEmail", "");
+
+            commit("setRegisterErrorEmailUnique", "");
+            commit("setRegisterErrorPassword", "");
+            commit("setRegisterError", "");
           }
         })
         .catch(error => {

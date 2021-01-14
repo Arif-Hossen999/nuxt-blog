@@ -45,9 +45,9 @@
         </v-form>
       </v-card-text>
       <v-divider></v-divider>
-      <v-card-action>
+      <v-card-actions>
         <v-btn color="success" @click="getInput()">Register</v-btn>
-      </v-card-action>
+      </v-card-actions>
 
     </v-card>
   </v-app>

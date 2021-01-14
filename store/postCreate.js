@@ -38,31 +38,42 @@ export const mutations = {
   // store backend catch error message
   setPostError(state, error) {
     state.postError = error;
-  }
+  },
 };
 export const actions = {
-  getInput({ state, commit }, userId) {
+  async getInput({ state, commit }) {
+    console.log("get input");
     if (state.postTitle && state.postDescription != null) {
-      return HTTP.createPost({
+      console.log("with form data");
+      await this.$axios
+      .$post("/api/create/post", {
         title: state.postTitle,
         post: state.postDescription,
-        user_id: userId
-      })
+        user_id: this.$auth.user.id
+    })
         .then(response => {
-          //   console.log(response);
+            // console.log(response);
           // check backend validation error message
-          if (response.data.length) {
-            if (response.data[0].message == "Title is required.") {
-              commit("setPostErrorTitle", response.data[0].message);
+          if (response.length) {
+            if (response[0].message == "Title is required.") {
+              commit("setPostErrorTitle", response[0].message);
             }
-            if (response.data[0].message == "Description is required.") {
-              commit("setPostErrorDescription", response.data[0].message);
+            if (response[0].message == "Description is required.") {
+              commit("setPostErrorDescription", response[0].message);
             }
           } else {
             // show success message
             this.$toast.success("Successfully posted");
+            this.$router.push({ name: "mypost" });
             // remove state data
-            state.postTitle = state.postDescription = state.postFormErrorTitle = state.postFormErrorDescription = state.postErrorTitle = state.postErrorDescription = state.postError = null;
+            commit("setPostTitle", "");
+            commit("setPostDescription", "");
+            commit("setPostFormErrorTitle", "");
+            commit("setPostFormErrorDescription", "");
+            commit("setPostErrorTitle", "");
+            commit("setPostErrorDescription", "");
+            commit("setPostError", "");
+            
           }
         })
         .catch(error => {
@@ -72,9 +83,11 @@ export const actions = {
     }
     // check frontend form validation
     if (state.postTitle == null) {
+      console.log("with out post title");
       commit("setPostFormErrorTitle", "Title is required.");
     }
     if (state.postDescription == null) {
+      console.log("with out post description");
       commit("setPostFormErrorDescription", "Description is required.");
     }
   }

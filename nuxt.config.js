@@ -28,9 +28,12 @@ export default {
     "@nuxtjs/axios",
     "@nuxtjs/toast",
     /** Authentication Module */
-    '@nuxtjs/auth',
-    'nuxt-vuex-localstorage'
+    "@nuxtjs/auth",
+    "nuxt-vuex-localstorage"
   ],
+  axios: {
+    baseURL: "http://127.0.0.1:3333" // Used as fallback if no runtime config is provided
+  },
 
   /**
    * Auth Module Detail Endpoints
@@ -39,10 +42,19 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/api/auth/login', method: 'post' },
-          logout: { url: '/api/auth/logout', method: 'post' },
-          user: { url: '/api/auth/user', method: 'get' }
+          login: {
+            url: "/api/auth/login",
+            method: "post",
+            propertyName: "user_token"
+          },
+          logout: false,
+          user: {
+            url: "/api/auth/user",
+            method: "get",
+            propertyName: ""
+          }
         }
+        //tokenType:""
       }
     }
   },
