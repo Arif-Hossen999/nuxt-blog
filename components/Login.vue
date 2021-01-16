@@ -14,10 +14,12 @@
           />
           <!-- show frontend error message -->
           <p>{{ loginFormErrorEmail }}</p>
+
           <!-- show backend error message -->
-          <p>{{ loginErrorEmail }}</p>
+          <!-- <p>{{ loginErrorEmail }}</p> -->
+
           <!-- show backend try error message -->
-          <p>{{ loginErrorEmailCheck }}</p>
+          <!-- <p>{{ loginErrorEmailCheck }}</p> -->
           <v-text-field
             type="password"
             label="Password"
@@ -28,9 +30,13 @@
           <!-- show frontend error message -->
           <p>{{ loginFormErrorPassword }}</p>
           <!-- show backend error message -->
-          <p>{{ loginErrorPassword }}</p>
+          <p>{{loginErrorEmailPasswordCheck}}</p>
+          
+          <!-- show backend error message -->
+          <!-- <p>{{ loginErrorPassword }}</p> -->
+
           <!-- show backend try error message -->
-          <p>{{ loginErrorPasswordCheck }}</p>
+          <!-- <p>{{ loginErrorPasswordCheck }}</p> -->
           <!-- show backend catch error message -->
           <p>{{ loginError }}</p>
         </v-form>
@@ -54,7 +60,7 @@ export default {
   methods: {
     // pass form input value
     ...mapMutations("login", ["setLoginEmail", "setLoginPassword"]),
-    ...mapActions("login", ["getInput", "getRegister"])
+    ...mapActions("login", ["getInput", "getRegister","removeData"])
   },
   computed: {
     ...mapState("login", [
@@ -64,15 +70,23 @@ export default {
       // show frontend form validation error message
       "loginFormErrorEmail",
       "loginFormErrorPassword",
+      // show backend email password check error message
+      "loginErrorEmailPasswordCheck",
+
       // show backend validation error message
-      "loginErrorEmail",
-      "loginErrorPassword",
+      // "loginErrorEmail",
+      // "loginErrorPassword",
+
       // show backend try error message
-      "loginErrorEmailCheck",
-      "loginErrorPasswordCheck",
+      // "loginErrorEmailCheck",
+      // "loginErrorPasswordCheck",
+      
       // show backend catch error message
       "loginError"
     ])
-  }
+  },
+  mounted() {
+    this.removeData();
+  },
 };
 </script>

@@ -1,16 +1,20 @@
 <template>
-  <div>
-    <MyPost />
-  </div>
+    <div>
+      <h2>My Post</h2>
+    <MyPost 
+    v-for="(myPost, index) in myPosts"
+      :key="index"
+      :myPost="myPost"
+    />
+    </div>
 </template>
 <script>
-import MyPost from "~/components/MyPost.vue";
+import MyPost from "@/components/MyPost.vue";
 import { mapState } from "vuex";
 export default {
-  components: {
-    MyPost
-  },
-  async fetch({ store, error }) {
+  MyPost,
+   
+    async fetch({ store, error }) {
     try {
       await store.dispatch("myPost/fetchMyPosts");
       // console.log(data);
@@ -21,12 +25,9 @@ export default {
       });
     }
   },
-  computed:{
-    // get my post from state
-  //   ...mapState({
-  //   myPosts: state => state.myPost.myPosts
-  // }),
-  }
-  
-};
+// get all post from state
+  computed: mapState({
+    myPosts: state => state.myPost.myPosts
+  })
+}
 </script>

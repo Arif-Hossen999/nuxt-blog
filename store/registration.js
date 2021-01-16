@@ -64,7 +64,7 @@ export const actions = {
     if (
       state.registerUsername &&
       state.registerEmail &&
-      state.registerPassword != null
+      state.registerPassword != ''
     ) {
       await this.$axios
         .$post("/api/auth/register", {
@@ -118,14 +118,30 @@ export const actions = {
     }
 
     // check frontend form validation
-    if (state.registerUsername == null) {
+    if (state.registerUsername == '') {
       commit("setRegisterFormErrorUsername", "Username is required.");
     }
-    if (state.registerEmail == null) {
+    if (state.registerEmail == '') {
       commit("setRegisterFormErrorEmail", "Password is required.");
     }
-    if (state.registerPassword == null) {
+    if (state.registerPassword == '') {
       commit("setRegisterFormErrorPassword", "Password is required.");
     }
+  },
+  async removeData({ commit }) {
+    // console.log("remove data");
+    commit("setRegisterUsername", "");
+            commit("setRegisterEmail", "");
+            commit("setRegisterPassword", "");
+
+            commit("setRegisterFormErrorUsername", "");
+            commit("setRegisterFormErrorEmail", "");
+            commit("setRegisterFormErrorPassword", "");
+            commit("setRegisterErrorUsername", "");
+            commit("setRegisterErrorEmail", "");
+
+            commit("setRegisterErrorEmailUnique", "");
+            commit("setRegisterErrorPassword", "");
+            commit("setRegisterError", "");
   }
 };

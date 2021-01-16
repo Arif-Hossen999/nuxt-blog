@@ -1,4 +1,3 @@
-import HTTP from "@/services/HTTP.js";
 export const state = () => ({
   myPosts: []
 });

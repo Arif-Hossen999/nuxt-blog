@@ -69,6 +69,7 @@ export default {
   // actions work when click any function
     ...mapActions('registration', [
       'getInput',
+      "removeData"
     ]),
   },
   computed: {
@@ -91,6 +92,9 @@ export default {
       'registerError',
 
     ]),
+  },
+  mounted() {
+    this.removeData();
   },
 };
 </script>

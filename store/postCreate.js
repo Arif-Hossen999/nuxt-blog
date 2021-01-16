@@ -38,21 +38,21 @@ export const mutations = {
   // store backend catch error message
   setPostError(state, error) {
     state.postError = error;
-  },
+  }
 };
 export const actions = {
   async getInput({ state, commit }) {
-    console.log("get input");
-    if (state.postTitle && state.postDescription != null) {
-      console.log("with form data");
+    // console.log("get input");
+    if (state.postTitle && state.postDescription != '') {
+      // console.log("with form data");
       await this.$axios
-      .$post("/api/create/post", {
-        title: state.postTitle,
-        post: state.postDescription,
-        user_id: this.$auth.user.id
-    })
+        .$post("/api/create/post", {
+          title: state.postTitle,
+          post: state.postDescription,
+          user_id: this.$auth.user.id
+        })
         .then(response => {
-            // console.log(response);
+          // console.log(response);
           // check backend validation error message
           if (response.length) {
             if (response[0].message == "Title is required.") {
@@ -73,7 +73,6 @@ export const actions = {
             commit("setPostErrorTitle", "");
             commit("setPostErrorDescription", "");
             commit("setPostError", "");
-            
           }
         })
         .catch(error => {
@@ -82,13 +81,23 @@ export const actions = {
         });
     }
     // check frontend form validation
-    if (state.postTitle == null) {
+    if (state.postTitle == '') {
       console.log("with out post title");
       commit("setPostFormErrorTitle", "Title is required.");
     }
-    if (state.postDescription == null) {
+    if (state.postDescription == '') {
       console.log("with out post description");
       commit("setPostFormErrorDescription", "Description is required.");
     }
+  },
+  async removeData({ commit }) {
+    // console.log("remove data");
+    commit("setPostTitle", "");
+    commit("setPostDescription", "");
+    commit("setPostFormErrorTitle", "");
+    commit("setPostFormErrorDescription", "");
+    commit("setPostErrorTitle", "");
+    commit("setPostErrorDescription", "");
+    commit("setPostError", "");
   }
 };
