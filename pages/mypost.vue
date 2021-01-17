@@ -1,6 +1,10 @@
 <template>
     <div>
-      <h2>My Post</h2>
+      <br>
+      <a href="/createpost">Create Post</a>
+      <br><br>
+      <h3>My Post</h3>
+      <br>
     <MyPost 
     v-for="(myPost, index) in myPosts"
       :key="index"

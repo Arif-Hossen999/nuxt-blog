@@ -54,7 +54,7 @@ export const mutations = {
   // store backend catch error message
   setRegisterError(state, error) {
     state.registerError = error;
-  },
+  }
 };
 // actions for user registration
 export const actions = {
@@ -64,14 +64,14 @@ export const actions = {
     if (
       state.registerUsername &&
       state.registerEmail &&
-      state.registerPassword != ''
+      state.registerPassword != ""
     ) {
       await this.$axios
         .$post("/api/auth/register", {
           username: state.registerUsername,
           email: state.registerEmail,
           password: state.registerPassword
-      })
+        })
         .then(response => {
           // console.log(response);
           // check backend validation error message
@@ -83,9 +83,7 @@ export const actions = {
             if (response[0].message == "email is required.") {
               commit("setRegisterErrorEmail", response[0].message);
             }
-            if (
-              response[0].message == "This email has already been taken."
-            ) {
+            if (response[0].message == "This email has already been taken.") {
               commit("setRegisterErrorEmailUnique", response[0].message);
             }
             if (response[0].message == "password is required.") {
@@ -118,30 +116,30 @@ export const actions = {
     }
 
     // check frontend form validation
-    if (state.registerUsername == '') {
+    if (state.registerUsername == "") {
       commit("setRegisterFormErrorUsername", "Username is required.");
     }
-    if (state.registerEmail == '') {
+    if (state.registerEmail == "") {
       commit("setRegisterFormErrorEmail", "Password is required.");
     }
-    if (state.registerPassword == '') {
+    if (state.registerPassword == "") {
       commit("setRegisterFormErrorPassword", "Password is required.");
     }
   },
   async removeData({ commit }) {
     // console.log("remove data");
     commit("setRegisterUsername", "");
-            commit("setRegisterEmail", "");
-            commit("setRegisterPassword", "");
+    commit("setRegisterEmail", "");
+    commit("setRegisterPassword", "");
 
-            commit("setRegisterFormErrorUsername", "");
-            commit("setRegisterFormErrorEmail", "");
-            commit("setRegisterFormErrorPassword", "");
-            commit("setRegisterErrorUsername", "");
-            commit("setRegisterErrorEmail", "");
+    commit("setRegisterFormErrorUsername", "");
+    commit("setRegisterFormErrorEmail", "");
+    commit("setRegisterFormErrorPassword", "");
+    commit("setRegisterErrorUsername", "");
+    commit("setRegisterErrorEmail", "");
 
-            commit("setRegisterErrorEmailUnique", "");
-            commit("setRegisterErrorPassword", "");
-            commit("setRegisterError", "");
+    commit("setRegisterErrorEmailUnique", "");
+    commit("setRegisterErrorPassword", "");
+    commit("setRegisterError", "");
   }
 };

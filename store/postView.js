@@ -1,4 +1,3 @@
-import HTTP from "@/services/HTTP.js";
 export const state = () => ({
   allPosts: [],
   
@@ -12,9 +11,10 @@ export const mutations = {
 };
 export const actions = {
   // fetch all post
-  fetchPosts({ commit }) {
-    return HTTP.getPost().then(response => {
-      commit("SET_POST", response.data);
+  async fetchPosts({ commit }) {
+    await this.$axios
+      .$get("/api/allpost").then(response => {
+      commit("SET_POST", response);
     });
   },
   

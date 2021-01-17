@@ -6,9 +6,9 @@
       <nuxt-link v-if="$auth && $auth.user && $auth.loggedIn" to="/mypost"
         >MyPost</nuxt-link
       >
-      <nuxt-link v-if="$auth && $auth.user && $auth.loggedIn" to="/createpost"
+      <!-- <nuxt-link v-if="$auth && $auth.user && $auth.loggedIn" to="/createpost"
         >Create Post</nuxt-link
-      >
+      > -->
       <nuxt-link v-if="$auth && $auth.user && $auth.loggedIn" to="/auth/logout"
         >Logout</nuxt-link
       >

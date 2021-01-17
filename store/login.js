@@ -1,4 +1,3 @@
-import HTTP from "@/services/HTTP.js";
 export const state = () => ({
   // variable for store login form input
   loginEmail: null,

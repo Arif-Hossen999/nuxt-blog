@@ -1,5 +1,3 @@
-import HTTP from "@/services/HTTP.js";
-
 export const state = () => ({
   // variable for store form input
   postTitle: null,
