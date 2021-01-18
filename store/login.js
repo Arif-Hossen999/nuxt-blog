@@ -4,6 +4,7 @@ export const state = () => ({
   loginPassword: null,
   // variable for store frontend form validation error message
   loginFormErrorEmail: null,
+  loginFormErrorEmailValidation: null,
   loginFormErrorPassword: null,
   // variable for store backend email password check error message
   loginErrorEmailPasswordCheck: null,
@@ -31,6 +32,9 @@ export const mutations = {
   // store form validation error message
   setLoginFormErrorEmail(state, error) {
     state.loginFormErrorEmail = error;
+  },
+  setLoginFormErrorEmailValidation(state, error) {
+    state.loginFormErrorEmailValidation = error;
   },
   setLoginFormErrorPassword(state, error) {
     state.loginFormErrorPassword = error;
@@ -73,7 +77,14 @@ export const actions = {
     try {
       // console.log("getInput try");
       if (state.loginEmail && state.loginPassword != '') {
-        // console.log("getInput");
+        // email validation
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const result = re.test(state.loginEmail);
+        if (!result) {
+          console.log(result, "result");
+          commit("setLoginFormErrorEmailValidation", "Valid email required.");
+        } else {
+          // console.log("getInput");
         let data = {
           email: state.loginEmail,
           password: state.loginPassword
@@ -89,6 +100,7 @@ export const actions = {
             commit("setLoginEmail", "");
             commit("setLoginPassword", "");
             commit("setLoginFormErrorEmail", "");
+            commit("setLoginFormErrorEmailValidation", "");
             commit("setLoginFormErrorPassword", "");
             commit("setLoginErrorEmailPasswordCheck", "");
           })
@@ -101,6 +113,8 @@ export const actions = {
               );
             }
           });
+        }
+        
       }
       // check frontend form validation
       if (state.loginEmail == '') {
@@ -119,6 +133,7 @@ export const actions = {
     commit("setLoginEmail", "");
     commit("setLoginPassword", "");
     commit("setLoginFormErrorEmail", "");
+    commit("setLoginFormErrorEmailValidation", "");
     commit("setLoginFormErrorPassword", "");
     commit("setLoginErrorEmailPasswordCheck", "");
   }

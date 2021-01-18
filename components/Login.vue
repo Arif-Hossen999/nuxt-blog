@@ -14,7 +14,7 @@
           />
           <!-- show frontend error message -->
           <p>{{ loginFormErrorEmail }}</p>
-
+          <p>{{loginFormErrorEmailValidation}}</p>
           <!-- show backend error message -->
           <!-- <p>{{ loginErrorEmail }}</p> -->
 
@@ -69,6 +69,7 @@ export default {
       "loginPassword",
       // show frontend form validation error message
       "loginFormErrorEmail",
+      "loginFormErrorEmailValidation",
       "loginFormErrorPassword",
       // show backend email password check error message
       "loginErrorEmailPasswordCheck",

@@ -7,6 +7,7 @@ export const state = () => ({
   // variable for store frontend form validation error message
   registerFormErrorUsername: null,
   registerFormErrorEmail: null,
+  registerFormErrorEmailValidation: null,
   registerFormErrorPassword: null,
   // variable for store backend validation message
   registerErrorUsername: null,
@@ -34,6 +35,9 @@ export const mutations = {
   },
   setRegisterFormErrorEmail(state, error) {
     state.registerFormErrorEmail = error;
+  },
+  setRegisterFormErrorEmailValidation(state, error) {
+    state.registerFormErrorEmailValidation = error;
   },
   setRegisterFormErrorPassword(state, error) {
     state.registerFormErrorPassword = error;
@@ -66,7 +70,14 @@ export const actions = {
       state.registerEmail &&
       state.registerPassword != ""
     ) {
-      await this.$axios
+      // email validation
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const result = re.test(state.registerEmail);
+      if (!result) {
+        console.log(result, "result");
+        commit("setRegisterFormErrorEmailValidation", "Valid email required.");
+      } else {
+        await this.$axios
         .$post("/api/auth/register", {
           username: state.registerUsername,
           email: state.registerEmail,
@@ -100,6 +111,7 @@ export const actions = {
 
             commit("setRegisterFormErrorUsername", "");
             commit("setRegisterFormErrorEmail", "");
+            commit("setRegisterFormErrorEmailValidation", "");
             commit("setRegisterFormErrorPassword", "");
             commit("setRegisterErrorUsername", "");
             commit("setRegisterErrorEmail", "");
@@ -113,6 +125,7 @@ export const actions = {
           // check bankend catch error message
           commit("setRegisterError", "Something went wrong.");
         });
+      }
     }
 
     // check frontend form validation
@@ -134,6 +147,7 @@ export const actions = {
 
     commit("setRegisterFormErrorUsername", "");
     commit("setRegisterFormErrorEmail", "");
+    commit("setRegisterFormErrorEmailValidation", "");
     commit("setRegisterFormErrorPassword", "");
     commit("setRegisterErrorUsername", "");
     commit("setRegisterErrorEmail", "");

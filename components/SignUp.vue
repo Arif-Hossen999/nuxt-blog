@@ -26,6 +26,7 @@
           />
           <!-- show frontend error message -->
           <p>{{registerFormErrorEmail}}</p>
+          <p>{{registerFormErrorEmailValidation}}</p>
           <!-- show backend error message -->
           <p>{{registerErrorEmail}}</p>
           <p>{{registerErrorEmailUnique}}</p>
@@ -82,6 +83,7 @@ export default {
       //use for show frontend form validation error message
       'registerFormErrorUsername',
       'registerFormErrorEmail',
+      'registerFormErrorEmailValidation',
       'registerFormErrorPassword',
       //use for show backend validation error message
       'registerErrorUsername',
