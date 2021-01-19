@@ -2,6 +2,7 @@
     <div>
       <br>
       <a href="/createpost">Create Post</a>
+      <a href="/profile">Profile</a>
       <br><br>
       <h3>My Post</h3>
       <br>
