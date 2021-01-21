@@ -1,22 +1,10 @@
-// import websocket for live chat
-import Vue from "vue";
-import Ws from '@adonisjs/websocket-client'
-// const ws = Ws('ws://localhost:3333')
-// Vue.use(ws);
-// const CarComponent = () => {
-//         return {
-//             msg: 'hello',
-//             whatever: 'hi'
-//         }
-// }
+import Ws from "@adonisjs/websocket-client";
+const ws = Ws("ws://localhost:3333");
 
-// console.log(ws, "ws.js");
-// const x = () => {
-//   return "test";
-// };
-export default function () {
-    return {
-                    msg: 'hello',
-                    whatever: 'hi'
-                }
-}
+export default (ctx, inject) => {
+//   console.log(ctx);
+//   console.log(ws);
+//   ws.connect()
+  ctx.$ws = ws;
+  inject("ws", ws);
+};
