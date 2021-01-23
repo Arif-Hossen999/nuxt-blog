@@ -37,6 +37,7 @@ export default {
     async initializeChatWs() {
       // connect websocket
       this.$ws.connect();
+      // console.log(this.$ws.connect(), "ws_connect")
       // connect websocket with backend start/socket.js
       this.chat = this.$ws.subscribe("chat");
       let chat = this.chat;
@@ -49,9 +50,15 @@ export default {
         //   console.log(event, "event");
         this.receiveMessage(event);
       });
+      // chat.on('close', () => {
+      // })
     },
     async sendMessage(message) {
-      this.chat.emit("message", message);
+      this.chat.emit("message",{
+        userId: this.$auth.user.id,
+        // userName : this.$auth.user.username,
+        body: message
+      });
     },
     async receiveMessage(msg) {
       this.messages.push(msg);
