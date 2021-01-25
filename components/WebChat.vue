@@ -1,6 +1,13 @@
 <template>
   <v-app>
     <v-card width="400px" class="mt-5 mx-a">
+      <v-btn
+        v-for="(user, i) in userDetails"
+        :key="'A' + i"
+        @click="showDetails(user.id)"
+        >{{ user.username }}</v-btn
+      >
+
       <v-card-title>
         <h1 class="dispay-1">Chat Room</h1>
       </v-card-title>
@@ -15,8 +22,22 @@
         </v-form>
       </v-card-text>
       <hr />
-      <h3>Welcome to my ChatRoom</h3>
-      <p v-for="(m, index) in messages" :key="index">{{ m.message }}</p>
+      <!-- show message -->
+      <div v-if="isTrue">
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>Welcome to my ChatRoom</v-list-item-title>
+            <!-- show db message -->
+            <v-list-item color="primary"
+             v-for="(m, index) in messages" :key="index"
+            >{{ m.message }}</v-list-item>
+            <!-- show user send message -->
+            <v-list-item
+            v-for="(m, index) in receiveMsg" :key="'b' + index"
+            >{{ m }}</v-list-item>
+          </v-list-item-content>
+        </v-list-item>
+      </div>
     </v-card>
   </v-app>
 </template>
@@ -24,17 +45,44 @@
 export default {
   data() {
     return {
+      isTrue: false,
+      receiveUserId: "",
+      userDetails: [],
       chat: "",
       inputMessage: "",
-      messages: []
+      messages: [],
+      receiveMsg: []
     };
   },
   // initialize websocket
   async mounted() {
     // console.log(this.$ws.connect(), "ws connect");
     this.initializeChatWs();
+    this.allUser();
   },
   methods: {
+    // show user name
+    async allUser() {
+      try {
+        await this.$axios.$get("/api/alluser").then(response => {
+          // console.log(response);
+          this.userDetails = response;
+          // console.log(this.userDetails , "userDetails");
+        });
+      } catch (error) {
+        // console.log(error);
+      }
+    },
+    // show user messages
+    async showDetails(id) {
+      this.isTrue = true;
+      this.receiveUserId = id;
+      await this.$axios.$get("/api/usermessage/" + id).then(response => {
+        console.log(response);
+        this.messages = response;
+      });
+      // this.receiveMsg = "";
+    },
     async initializeChatWs() {
       // connect websocket
       this.$ws.connect();
@@ -61,21 +109,21 @@ export default {
         userId: this.$auth.user.id
       });
     },
+    // send user message
     async sendMessage(message) {
       this.chat.emit("message", {
         sendUserId: this.$auth.user.id,
-        receiveUserId: 2,
+        receiveUserId: this.receiveUserId,
         // userName : this.$auth.user.username,
         body: message
       });
       // resetting the newMessage
-      // this.message = "";
+      this.inputMessage = "";
+      // this.receiveMsg = "";
       // this.$nuxt.refresh();
     },
     async receiveMessage(msg) {
-      for(let i=0; i<msg.length; i++){
-        this.messages.push(msg[i]);
-      }
+      this.receiveMsg.push(msg);
     }
   }
 };
