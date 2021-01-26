@@ -1,40 +1,45 @@
 <template>
   <v-app>
     <v-card width="400px" class="mt-5 mx-a">
-      <v-btn
-        v-for="(user, i) in userDetails"
-        :key="'A' + i"
-        @click="showDetails(user.id)"
-        >{{ user.username }}</v-btn
-      >
-
       <v-card-title>
         <h1 class="dispay-1">Chat Room</h1>
       </v-card-title>
-      <v-card-text>
-        <v-form>
-          <v-text-field
-            label="Message"
-            v-model="inputMessage"
-            prepend-icon="mdi-email"
-          />
-          <v-btn color="info" @click="sendMessage(inputMessage)">Send</v-btn>
-        </v-form>
-      </v-card-text>
-      <hr />
-      <!-- show message -->
+      <v-btn
+        v-for="(user, i) in userDetails"
+        :key="'A' + i"
+        @click="showDetails(user.id, user.username)"
+        >{{ user.username }}</v-btn
+      >
       <div v-if="isTrue">
+        <!-- send message -->
+        <v-card-text>
+          <v-form>
+            <v-text-field
+              label="Message"
+              v-model="inputMessage"
+              prepend-icon="mdi-email"
+            />
+            <v-btn color="info" @click="sendMessage(inputMessage)">send</v-btn>
+          </v-form>
+        </v-card-text>
+        <hr />
+        <!-- show message -->
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title>Welcome to my ChatRoom</v-list-item-title>
+            <v-list-item-title
+              >Chat with : {{ receiveUserName }}</v-list-item-title
+            >
             <!-- show db message -->
-            <v-list-item color="primary"
-             v-for="(m, index) in messages" :key="index"
-            >{{ m.message }}</v-list-item>
-            <!-- show user send message -->
             <v-list-item
-            v-for="(m, index) in receiveMsg" :key="'b' + index"
-            >{{ m }}</v-list-item>
+              color="primary"
+              v-for="(m, index) in messages"
+              :key="index"
+              >{{ m.user_name }} : {{ m.message }}</v-list-item
+            >
+            <!-- show user send and recive message -->
+            <v-list-item v-for="(m, index) in receiveMsg" :key="'b' + index" v-if="(m.sendUserId == receiveUserId || m.sendUserId == checkUserId )"
+              >{{ m.sendUserName }} : {{ m.userMessage }}</v-list-item
+            >
           </v-list-item-content>
         </v-list-item>
       </div>
@@ -47,11 +52,13 @@ export default {
     return {
       isTrue: false,
       receiveUserId: "",
+      receiveUserName: "",
       userDetails: [],
       chat: "",
       inputMessage: "",
       messages: [],
-      receiveMsg: []
+      receiveMsg: [],
+      checkUserId: '',
     };
   },
   // initialize websocket
@@ -74,11 +81,16 @@ export default {
       }
     },
     // show user messages
-    async showDetails(id) {
+    async showDetails(id, name) {
+      // console.log(id, "id");
+      // console.log(name);
+      this.receiveMsg = [];
       this.isTrue = true;
+      this.checkUserId = this.$auth.user.id;
       this.receiveUserId = id;
+      this.receiveUserName = name;
       await this.$axios.$get("/api/usermessage/" + id).then(response => {
-        console.log(response);
+        // console.log(response);
         this.messages = response;
       });
       // this.receiveMsg = "";
@@ -106,7 +118,8 @@ export default {
     // send user details
     async sendUserDetails(info) {
       this.chat.emit("setusersocketid", {
-        userId: this.$auth.user.id
+        userId: this.$auth.user.id,
+        userName: this.$auth.user.username
       });
     },
     // send user message
@@ -114,7 +127,7 @@ export default {
       this.chat.emit("message", {
         sendUserId: this.$auth.user.id,
         receiveUserId: this.receiveUserId,
-        // userName : this.$auth.user.username,
+        userName: this.$auth.user.username,
         body: message
       });
       // resetting the newMessage
@@ -123,8 +136,9 @@ export default {
       // this.$nuxt.refresh();
     },
     async receiveMessage(msg) {
+      // console.log(msg);
       this.receiveMsg.push(msg);
-    }
+    },
   }
 };
 </script>
