@@ -67,8 +67,8 @@ export default {
       messages: [],
       receiveMsg: [],
       checkUserId: "",
-      messageCounter: 0,
-      // messageCountersendUserId: ""
+      messageCounter: '',
+      messageCountersendUserId: ""
     };
   },
   // initialize websocket
@@ -101,7 +101,7 @@ export default {
       try {
         // console.log(id, "id");
         // console.log(name);
-        // this.messageCounter = 0;
+        // this.messageCounter = '';
         this.receiveMsg = [];
         this.isTrue = true;
         this.checkUserId = this.$auth.user.id;
@@ -155,7 +155,7 @@ export default {
     async sendMessage(message) {
       // try {
       // console.log(message);
-      // this.messageCounter = 0;
+      // this.messageCounter = "";
       this.chat.emit("message", {
         sendUserId: this.$auth.user.id,
         receiveUserId: this.receiveUserId,
@@ -168,14 +168,19 @@ export default {
       // this.$nuxt.refresh();
       // } catch (error) {
       //   console.log(error);
+      //   if(error.length){
+      //     this.$nuxt.refresh();
+      //   }
       // }
     },
     async receiveMessage(msg) {
       // console.log(msg);
       // this.messageCountersendUserId = msg.sendUserId;
-      this.messageCounter++;
+      // this.messageCounter = 1;
       this.receiveMsg.push(msg);
+      // console.log(this.receiveMsg, "Msg");
     }
   }
 };
 </script>
+
