@@ -134,8 +134,8 @@ export default {
           //   console.log(event, "event");
           this.receiveMessage(event);
         });
-        // chat.on('close', () => {
-        // })
+        chat.on('close', () => {
+        })
       } catch (error) {
         // console.log(error);
       }
