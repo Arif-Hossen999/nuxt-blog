@@ -16,11 +16,12 @@
       <div v-if="isTrue">
         <!-- send message -->
         <v-card-text>
-          <v-form>
+          <v-form onSubmit="return false;">
             <v-text-field
               label="Message"
               v-model="inputMessage"
               prepend-icon="mdi-email"
+              @keyup.enter="sendMessage(inputMessage)"
             />
             <v-btn color="info" @click="sendMessage(inputMessage)">send</v-btn>
           </v-form>
@@ -43,9 +44,7 @@
             <v-list-item
               v-for="(m, index) in receiveMsg"
               :key="'b' + index"
-              v-if="
-                m.sendUserId == receiveUserId || m.sendUserId == checkUserId
-              "
+              v-if="m.sendUserId == receiveUserId || m.sendUserId == checkUserId"
               >{{ m.sendUserName }} : {{ m.userMessage }}</v-list-item
             >
           </v-list-item-content>
@@ -131,7 +130,7 @@ export default {
         });
         // message receive from the user
         chat.on("message", event => {
-          //   console.log(event, "event");
+            // console.log(event, "event");
           this.receiveMessage(event);
         });
         chat.on('close', () => {
@@ -174,6 +173,7 @@ export default {
       // }
     },
     async receiveMessage(msg) {
+      // console.log("receive message");
       // console.log(msg);
       // this.messageCountersendUserId = msg.sendUserId;
       // this.messageCounter = 1;
