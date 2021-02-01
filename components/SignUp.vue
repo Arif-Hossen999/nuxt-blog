@@ -2,7 +2,7 @@
   <v-app>
     <v-card width="400px" class="mt-5 mx-a">
       <v-card-title>
-        <h1 class="dispay-1">Sign up</h1>
+        <h1 class="dispay-1">{{ $t("signUp.signUp") }}</h1>
       </v-card-title>
       
       <v-card-text>
@@ -47,7 +47,7 @@
       </v-card-text>
       <v-divider></v-divider>
       <v-card-actions>
-        <v-btn color="success" @click="getInput()">Register</v-btn>
+        <v-btn color="success" @click="getInput()">{{$t("signUp.register")}}</v-btn>
       </v-card-actions>
 
     </v-card>

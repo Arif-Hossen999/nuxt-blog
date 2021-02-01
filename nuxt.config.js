@@ -29,7 +29,9 @@ export default {
     "@nuxtjs/toast",
     /** Authentication Module */
     "@nuxtjs/auth",
-    "nuxt-vuex-localstorage"
+    "nuxt-vuex-localstorage",
+    // Internationalization
+    'nuxt-i18n',
   ],
   axios: {
     baseURL: "http://127.0.0.1:3333" // Used as fallback if no runtime config is provided
@@ -57,6 +59,26 @@ export default {
         //tokenType:""
       }
     }
+  },
+
+  // Internationalization
+  i18n: {
+    defaultLocale: 'en',
+    fallbackLocale: 'en',
+    locales: [
+      {
+        code: 'en',
+        name: 'English',
+        file: 'en/en.js'
+      },
+      {
+        code: 'bn',
+        name: 'বাংলা',
+        file: 'bn/bn.js'
+      }
+    ],
+    lazy: true, // for reading from custom file
+    langDir: 'languages/',
   },
 
   // show success error message
