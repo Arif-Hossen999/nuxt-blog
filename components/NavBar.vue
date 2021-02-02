@@ -22,6 +22,7 @@
         to="/auth/signup"
         >Signup</nuxt-link
       >
+      <!-- add localization menu -->
       <nuxt-link
         v-for="locale in availableLocales"
         :key="locale.code"
