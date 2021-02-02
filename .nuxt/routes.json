@@ -1,0 +1,122 @@
+[
+  {
+    "name": "index___bn",
+    "path": "/bn",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  },
+  {
+    "name": "createpost___en",
+    "path": "/createpost",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\createpost.vue",
+    "chunkName": "pages/createpost"
+  },
+  {
+    "name": "mypost___en",
+    "path": "/mypost",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\mypost.vue",
+    "chunkName": "pages/mypost"
+  },
+  {
+    "name": "profile___en",
+    "path": "/profile",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\profile.vue",
+    "chunkName": "pages/profile"
+  },
+  {
+    "name": "uploadimage___en",
+    "path": "/uploadimage",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\uploadimage.vue",
+    "chunkName": "pages/uploadimage"
+  },
+  {
+    "name": "webchat___en",
+    "path": "/webchat",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\webchat.vue",
+    "chunkName": "pages/webchat"
+  },
+  {
+    "name": "auth-login___en",
+    "path": "/auth/login",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\auth\\\\login.vue",
+    "chunkName": "pages/auth/login"
+  },
+  {
+    "name": "auth-logout___en",
+    "path": "/auth/logout",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\auth\\\\logout.vue",
+    "chunkName": "pages/auth/logout"
+  },
+  {
+    "name": "auth-signup___en",
+    "path": "/auth/signup",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\auth\\\\signup.vue",
+    "chunkName": "pages/auth/signup"
+  },
+  {
+    "name": "createpost___bn",
+    "path": "/bn/createpost",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\createpost.vue",
+    "chunkName": "pages/createpost"
+  },
+  {
+    "name": "mypost___bn",
+    "path": "/bn/mypost",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\mypost.vue",
+    "chunkName": "pages/mypost"
+  },
+  {
+    "name": "profile___bn",
+    "path": "/bn/profile",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\profile.vue",
+    "chunkName": "pages/profile"
+  },
+  {
+    "name": "uploadimage___bn",
+    "path": "/bn/uploadimage",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\uploadimage.vue",
+    "chunkName": "pages/uploadimage"
+  },
+  {
+    "name": "webchat___bn",
+    "path": "/bn/webchat",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\webchat.vue",
+    "chunkName": "pages/webchat"
+  },
+  {
+    "name": "auth-login___bn",
+    "path": "/bn/auth/login",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\auth\\\\login.vue",
+    "chunkName": "pages/auth/login"
+  },
+  {
+    "name": "auth-logout___bn",
+    "path": "/bn/auth/logout",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\auth\\\\logout.vue",
+    "chunkName": "pages/auth/logout"
+  },
+  {
+    "name": "auth-signup___bn",
+    "path": "/bn/auth/signup",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\auth\\\\signup.vue",
+    "chunkName": "pages/auth/signup"
+  },
+  {
+    "name": "editPost-id___bn",
+    "path": "/bn/editPost/:id?",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\editPost\\\\_id.vue",
+    "chunkName": "pages/editPost/_id"
+  },
+  {
+    "name": "editPost-id___en",
+    "path": "/editPost/:id?",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\editPost\\\\_id.vue",
+    "chunkName": "pages/editPost/_id"
+  },
+  {
+    "name": "index___en",
+    "path": "/",
+    "component": "E:\\\\project\\\\nuxt_blog\\\\client\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  }
+]

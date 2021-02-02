@@ -1,0 +1,62 @@
+{
+  "CreatePost": {
+    "description": "Auto imported from components/CreatePost.vue"
+  },
+  "LazyCreatePost": {
+    "description": "Auto imported from components/CreatePost.vue"
+  },
+  "Index": {
+    "description": "Auto imported from components/Index.vue"
+  },
+  "LazyIndex": {
+    "description": "Auto imported from components/Index.vue"
+  },
+  "Login": {
+    "description": "Auto imported from components/Login.vue"
+  },
+  "LazyLogin": {
+    "description": "Auto imported from components/Login.vue"
+  },
+  "LoginTest": {
+    "description": "Auto imported from components/LoginTest.vue"
+  },
+  "LazyLoginTest": {
+    "description": "Auto imported from components/LoginTest.vue"
+  },
+  "Logo": {
+    "description": "Auto imported from components/Logo.vue"
+  },
+  "LazyLogo": {
+    "description": "Auto imported from components/Logo.vue"
+  },
+  "MyPost": {
+    "description": "Auto imported from components/MyPost.vue"
+  },
+  "LazyMyPost": {
+    "description": "Auto imported from components/MyPost.vue"
+  },
+  "NavBar": {
+    "description": "Auto imported from components/NavBar.vue"
+  },
+  "LazyNavBar": {
+    "description": "Auto imported from components/NavBar.vue"
+  },
+  "Profile": {
+    "description": "Auto imported from components/Profile.vue"
+  },
+  "LazyProfile": {
+    "description": "Auto imported from components/Profile.vue"
+  },
+  "SignUp": {
+    "description": "Auto imported from components/SignUp.vue"
+  },
+  "LazySignUp": {
+    "description": "Auto imported from components/SignUp.vue"
+  },
+  "WebChat": {
+    "description": "Auto imported from components/WebChat.vue"
+  },
+  "LazyWebChat": {
+    "description": "Auto imported from components/WebChat.vue"
+  }
+}
